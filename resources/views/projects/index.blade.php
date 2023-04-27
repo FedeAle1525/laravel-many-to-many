@@ -34,9 +34,10 @@
         <th scope="col">Nome</th>
         <!-- <th scope="col">Slug</th> -->
         <th scope="col">Descrizione</th>
-
         <!-- Aggiungo Colonna con il Nome della Tipologia -->
         <th scope="col">Tipologia</th>
+        <!-- Aggiungo Colonna con i Nomi delle Tecnologie -->
+        <th scope="col">Tecnologie</th>
         <th scope="col">Cliente</th>
         <th scope="col">URL</th>
 
@@ -63,6 +64,17 @@
         <!-- Laravel farà la Query recuperando i dati della Tipologia relazionata (come Istanza) da cui recupero il 'nome'  -->
         <!-- ATTENZIONE: Operatore Ternario per controllo valori NULLI -->
         <td>{{ $project->type ? $project->type->name : 'Nessuna'}}</td>
+
+        <!-- Posso leggere il Metodo 'technologies()' della Relazione, viene interpretato come Istanza della Relazione 
+        a cui posso associare i vari metodo del Query Builder  -->
+        <td>
+          @forelse($project->technologies()->orderBy('name')->get() as $tech)
+          <span class="badge bg-info">{{ $tech->name }}</span>
+          @empty
+          Nessuna
+          @endforelse
+        </td>
+
         <td>{{$project->client}}</td>
         <td>{{$project->url}}</td>
 
