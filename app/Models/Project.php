@@ -26,4 +26,11 @@ class Project extends Model
 
         return $this->belongsTo(Type::class);
     }
+
+    // Indico una Relazione: Project(s) [N:N] Technology(ies), cioe' un Progetto puo' avere piu' Tag associati
+    public function technologies()
+    {
+
+        return $this->belongsToMany(Technology::class);
+    }
 }
