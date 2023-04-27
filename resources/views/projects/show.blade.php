@@ -24,12 +24,29 @@
         @endif
       </span>
     </li>
+
+    <!-- Aggiungo Lista con Nome delle Tecnologie -->
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+      <div class="ms-2 me-auto">
+        <div class="fw-bold">Tecnologie</div>
+        <ul>
+          @forelse($project->getListTechOrderByName() as $tech)
+          <li> {{ $tech->name }} </li>
+          @empty
+          Nessuna Tecnologia
+          @endforelse
+        </ul>
+
+      </div>
+    </li>
+
     <li class="list-group-item d-flex justify-content-between align-items-start">
       <div class="ms-2 me-auto">
         <div class="fw-bold">Cliente</div>
         {{ $project->client }}
       </div>
     </li>
+
     <li class="list-group-item d-flex justify-content-between align-items-start">
       <div class="ms-2 me-auto">
         <div class="fw-bold">URL</div>

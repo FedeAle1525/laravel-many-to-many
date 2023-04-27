@@ -68,7 +68,7 @@
         <!-- Posso leggere il Metodo 'technologies()' della Relazione, viene interpretato come Istanza della Relazione 
         a cui posso associare i vari metodo del Query Builder  -->
         <td>
-          @forelse($project->technologies()->orderBy('name')->get() as $tech)
+          @forelse($project->getListTechOrderByName() as $tech)
           <span class="badge bg-info">{{ $tech->name }}</span>
           @empty
           Nessuna

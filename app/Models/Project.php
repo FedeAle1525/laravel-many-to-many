@@ -33,4 +33,11 @@ class Project extends Model
 
         return $this->belongsToMany(Technology::class);
     }
+
+    // Metodo che recupera da DB la Lista delleTecnologie ordinate per Nome
+    public function getListTechOrderByName()
+    {
+
+        return $this->technologies()->orderBy('name')->get();
+    }
 }
