@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -52,7 +53,10 @@ class ProjectController extends Controller
         // Recupero tutte le Tipologie dal DB e le passo alla Vista
         $types = Type::orderBy('name', 'asc')->get();
 
-        return view('projects.create', compact('types'));
+        // Recupero tutte le Tecnologie dal DB e le passo alla Vista
+        $technologies = Technology::orderBy('name')->get();
+
+        return view('projects.create', compact('types', 'technologies'));
     }
 
     /**
