@@ -137,6 +137,14 @@ class ProjectController extends Controller
         // Modifico i valori del Progetto ($project) con quelli presenti nella Request ($data) ottenuti vdal Form
         $project->update($data);
 
+        // Se l'Array di Tags esiste nella Richiesta, aggiorno la Relazione N:N modificando i dati della Tabella Ponte con 'sync'
+        // altrimenti vuol dire che nulla e' stato selezionato e la Relazione e' da eliminare
+        if (isset($data['technologies'])) {
+            $project->technologies()->sync($data['technologies']);
+        } else {
+            $project->technologies()->detach();
+        }
+
         return to_route('projects.show', $project);
     }
 
