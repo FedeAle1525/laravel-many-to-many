@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -24,6 +25,9 @@ class ProjectSeeder extends Seeder
         // Con il Metodo all() la trasformo in un array
         $type_ids = Type::all()->pluck('id')->all();
 
+        // Pesco dal DB tutti i possibili ID della Tabella 'technologies'
+        $tech_ids = Technology::all()->pluck('id')->all();
+
         for ($i = 0; $i < 50; $i++) {
 
             $project = new Project();
@@ -39,6 +43,11 @@ class ProjectSeeder extends Seeder
             $project->type_id = $faker->optional()->randomElement($type_ids);
 
             $project->save();
+
+            // Faccio dopo 'save' perchè altrimenti non avrò la Colonna ID da assocciare alle Tecnologie
+            // Accedo alla Relazione tra Project(s)-Technology(ies) per collegarli e riempire Tabella Ponte
+            // Lo Faccio pescando in modo casuale un Array di Tecnologie (ID) da associare a un determinato Progettophp
+            $project->technologies()->attach($faker->randomElements($tech_ids, rand(0, 9)));
         }
     }
 }
