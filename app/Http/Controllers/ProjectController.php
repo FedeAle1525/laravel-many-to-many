@@ -78,6 +78,11 @@ class ProjectController extends Controller
         // Aggiungere variabile $fillable in Model per usare 'create'
         $project = Project::create($data);
 
+        // Se l'Array di Tags esiste nella Richiesta, creo relazione N:N e riempio Tabella Ponte
+        if (isset($data['technologies'])) {
+            $project->technologies()->attach($data['technologies']);
+        }
+
         return to_route('projects.show', $project);
     }
 
