@@ -41,7 +41,6 @@
         <label class="form-label">Tipologia</label>
         <div class="input-group">
           <select class="form-select @error('type_id') is-invalid @enderror" name="type_id">
-            <option selected hidden>Seleziona Tipologia</option>
             <option value="">Nessuna</option>
 
             <!-- Ciclo le varie Tipologie recuperate dalla Collection passata alla Vista nel metodo 'create' del Controller -->
