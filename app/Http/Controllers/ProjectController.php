@@ -109,7 +109,10 @@ class ProjectController extends Controller
         // Recupero tutte le Tipologie dal DB e le passo alla Vista
         $types = Type::orderBy('name', 'asc')->get();
 
-        return view('projects.edit', compact('project', 'types'));
+        // Recupero tutte le Tecnologie dal DB e le passo alla Vista
+        $technologies = Technology::orderBy('name')->get();
+
+        return view('projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**

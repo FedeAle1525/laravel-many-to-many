@@ -40,4 +40,11 @@ class Project extends Model
 
         return $this->technologies()->orderBy('name')->get();
     }
+
+    // Metodo che recupera la lista di ID delle Tecnologie associate al Progetto
+    public function getListTechIds()
+    {
+
+        return $this->technologies->pluck('id')->all();
+    }
 }

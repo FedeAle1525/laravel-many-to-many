@@ -59,6 +59,28 @@
         </div>
       </div>
 
+      <!-- Gruppo di Check Box per la Tecnologia -->
+      <div class="mb-3">
+        <label class="form-label d-block">Tecnologie</label>
+
+        @foreach($technologies as $tech)
+        <div class="form-check form-check-inline">
+          <!-- Volendo ottenere un Array di Nomi, aggiungo all'attributo 'name' le [] -->
+          <!-- Per gestire l'Errore controllo che l'id è presente nell'Array di Tag inviato al form che recupero con 'old' a cui passo l'Array di Tecnologie associate al Progetto come parametro di default -->
+          <input class="form-check-input @error('technologies') is-invalid @enderror" type="checkbox" value="{{$tech->id}}" name="technologies[]" @checked( in_array($tech->id, old('technologies', $project->getListTechIds())) )>
+          <label class="form-check-label">
+            {{ $tech->name }}
+          </label>
+
+          @error('technologies')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+          @enderror
+        </div>
+        @endforeach
+
+      </div>
 
       <div class="mb-3">
         <label class="form-label">Cliente</label>
